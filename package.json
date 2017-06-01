@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@tap-format/spec": "^0.2.0",
+    "browserify": "^14.4.0",
     "buffer-equal": "^1.0.0",
     "concat-stream": "^1.6.0",
     "dependency-check": "^2.8.0",
@@ -62,7 +63,8 @@
     "standard": "^10.0.1",
     "tape": "^4.6.3",
     "temporary-directory": "^1.0.2",
-    "xvfb-maybe": "^0.2.1"
+    "xvfb-maybe": "^0.2.1",
+    "yo-yoify": "^3.7.3"
   },
   "homepage": "https://github.com/hypermodules/hyperamp",
   "keywords": [
@@ -88,7 +90,8 @@
     "rebuild": "electron-rebuild",
     "build": "build --dir",
     "dist": "build",
-    "clear": "electron scripts/clear.js"
+    "clear": "electron scripts/clear.js",
+    "bundle": "browserify -x node_modules/electron/index.js -x node_modules/entypo/index.js --ignore-missing --no-builtins --no-commondir --insert-global-vars=\"global\" --no-browser-field renderer/index.js -g yo-yoify -o renderer/dist.js"
   },
   "build": {
     "appId": "com.hypermodules.hyperamp",
