@@ -67,6 +67,14 @@ module.exports = css`
 
   /* use colgroup to sanely apply width properties  */
   /* https://docs.webplatform.org/wiki/html/elements/colgroup */
+  .mediaList .art { width: 39px }
+  .mediaList .artbox {
+    width: 35px;
+    height: 35px;
+    background: var(--bg);
+    background-size: cover;
+    background-position: center;
+  }
   .mediaList .title { width: 12em }
   .mediaList .time { width: 4em }
   .mediaList .artist { width: 10em }

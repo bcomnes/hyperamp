@@ -3,6 +3,9 @@ var fd = require('format-duration')
 var cn = require('classnames')
 var Component = require('nanocomponent')
 var document = require('global/document')
+var path = require('path')
+var defaultBG = path.resolve(__dirname, '../../../static/splash.jpg')
+var fileUrlFromPath = require('file-url')
 var { formatCount } = require('./lib')
 var { COLUMNS } = require('../../lib/constants')
 var styles = require('./styles')
@@ -151,8 +154,14 @@ class TrackView extends Component {
       [styles.selected]: this.selectedIndex === idx + this.sliceStartIndex
     })
 
+    var fileUrl = fileUrlFromPath(track.artwork || defaultBG)
+    var imgStyle = fileUrl
+      ? `background-image: url(${fileUrl})`
+      : ''
+
     return html`
       <tr id="track-${idx + this.sliceStartIndex}" data-key=${key} class=${classes}>
+        <td><div style=${imgStyle} class=${styles.artbox}></div></td>
         ${columns.map(col => html`
           <td class=${styles[col]}>${meta[col]}</td>
         `)}
@@ -190,6 +199,7 @@ class TrackView extends Component {
           <table style=${sliceOffset} class=${styles.mediaList}>
             <thead oncontextmenu=${this.metaMenu} class=${styles.stickyHead}>
               <tr>
+                <th class=${styles.art}> </td>
                 ${columns.map(col => html`
                   <th class=${styles[col]}>${capitalize(col)}</th>
                 `)}
